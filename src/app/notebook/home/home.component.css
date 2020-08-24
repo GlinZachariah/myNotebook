@@ -1,9 +1,30 @@
+
+
 .section-col{
     height: 100vh;
     border-right:5px solid #7d3cff;
+    padding: 0;
 }
 
 .page-col{
     height: 100vh;
     border-right:5px solid #7d3cff;
+    padding: 0;
 }
+
+.add-section{
+    background-color: #b997fd;
+    height: 45px;
+    padding:10px;
+}
+
+.section-input{
+    font-size: revert;
+    background-color: #b997fd;
+    border: 0;
+}
+
+.section-input:focus{
+    outline-color: #7d3cff;
+}
+

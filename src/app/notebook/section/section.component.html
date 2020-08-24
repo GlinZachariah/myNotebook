@@ -1,1 +1,5 @@
-<p>section works!</p>
+<div class="section" (mouseover)="showDelete=true" (mouseout)="showDelete =false">
+    {{currentNote.section}}
+
+    <div [ngClass]="{'d-none':!showDelete}" class="float-right fa fa-trash mt-1"></div>
+</div>
