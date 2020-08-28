@@ -8,6 +8,10 @@ import { Notebook } from 'src/app/services/notebook.model';
 })
 export class HomeComponent implements OnInit {
   notebooksList;
+
+  currentNotebook:Notebook;
+  currentPage;
+  
   constructor(private service:NotebookService) { 
     this.notebooksList=this.service.notebooks;
    }
@@ -15,10 +19,30 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addNewSection(sectionData:HTMLInputElement){
-    if(sectionData.value.length > 0 && !sectionData.validity.patternMismatch)
-    this.service.notebooks.push(new Notebook(sectionData.value));
-    sectionData.value='';
+  addNewSection(section:HTMLInputElement){
+    if(section.value.length > 0 && !section.validity.patternMismatch)
+    this.service.notebooks.push(new Notebook(section.value));
+    section.value='';
+  }
+
+  addNewPage(page:HTMLInputElement){
+    if(page.value.length > 0 && !page.validity.patternMismatch)
+    this.service.notebooks.forEach((note:Notebook)=>{
+      if(this.currentNotebook.section == note.section){
+        note.addPage(page.value);
+      }
+    });
+    page.value='';
+  }
+
+  showNote(note:Notebook){
+    this.currentNotebook = note;
+    console.log(note);
+  }
+
+  showPage(page:string){
+    this.currentPage = page;
+    console.log(this.currentPage);
   }
 
 }

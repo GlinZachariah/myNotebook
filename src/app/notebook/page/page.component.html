@@ -1,1 +1,5 @@
-<p>page works!</p>
+<div class="page" (mouseover)="showDelete=true" (mouseout)="showDelete =false" (click)="loadContent(currentPage)">
+    {{currentPage}}
+
+    <div [ngClass]="{'d-none':!showDelete}"  class="float-right fa fa-trash mt-1"></div>
+</div>

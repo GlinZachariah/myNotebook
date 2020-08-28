@@ -123,8 +123,13 @@
               "devServerTarget": "myNotebook:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "myNotebook"
 }

@@ -1,5 +1,5 @@
 export class Notebook{
-    page:string[]
+    page:string[]=[];
 
     constructor( public section:string ){}
 

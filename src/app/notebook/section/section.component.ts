@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Notebook } from 'src/app/services/notebook.model';
 
 @Component({
@@ -9,9 +9,14 @@ import { Notebook } from 'src/app/services/notebook.model';
 export class SectionComponent implements OnInit {
   showDelete:boolean = false;
   @Input() currentNote:Notebook;
+  @Output() loadNote = new EventEmitter<Notebook>();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  loadPage(Note:Notebook){
+    this.loadNote.emit(Note);
   }
 
 }
