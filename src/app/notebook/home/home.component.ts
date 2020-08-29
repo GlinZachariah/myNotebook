@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotebookService } from "../../services/notebook.service";
 import { Notebook } from 'src/app/services/notebook.model';
 import { Response } from "../../services/Response.model";
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   currentNotebook:Notebook;
   currentPage;
   
-  constructor(private service:NotebookService) { 
+  constructor(private service:NotebookService,private router:Router) { 
     this.notebooksList=this.service.notebooks;
    }
 
@@ -25,7 +26,14 @@ export class HomeComponent implements OnInit {
       else if(res.message == "NOT EMPTY"){
         let filenames:string[] = res.payLoad;
         filenames.forEach((file)=>{
-          this.service.notebooks.push(new Notebook(file));
+          var flag=1;
+          this.service.notebooks.forEach((note)=>{
+            if(note.section == file){
+              var flag=0;
+            }
+          });
+          if(flag==1)
+            this.service.notebooks.push(new Notebook(file));
         })
       }
     });
@@ -54,6 +62,9 @@ export class HomeComponent implements OnInit {
 
   showNote(note:Notebook){
     this.currentNotebook = note;
+    // console.log("ROuter data : ");
+    // console.log(this.router);
+    this.router.navigate([note.section]);
     console.log(note);
   }
 
