@@ -1,5 +1,8 @@
-<div class="section" (mouseover)="showDelete=true" (mouseout)="showDelete =false" (click)="loadPage(currentNote)">
-    {{currentNote.section}}
+<div class="section" (mouseover)="showDelete=true" (mouseout)="showDelete =false" >
+    <span class="pr-4" (click)="loadPage(currentNote)">
+        {{currentNote.section}}
+    </span>
+   
 
-    <div [ngClass]="{'d-none':!showDelete}"  class="float-right fa fa-trash mt-1"></div>
+    <div [ngClass]="{'d-none':!showDelete}" (click)="deleteSection(currentNote)"  class="float-right fa fa-trash mt-1 ml-3 pl-2 pr-2"></div>
 </div>

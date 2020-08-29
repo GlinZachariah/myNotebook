@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgxSummernoteModule } from "ngx-summernote";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NotebookModule } from "./notebook/notebook.module";
 import { EditorModule } from "./editor/editor.module";
 import { ViewerModule } from "./viewer/viewer.module";
+import { NotebookService } from './services/notebook.service';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,10 @@ import { ViewerModule } from "./viewer/viewer.module";
     NgxSummernoteModule,
     EditorModule,
     ViewerModule,
-    NotebookModule
+    NotebookModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [NotebookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

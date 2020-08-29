@@ -6,7 +6,7 @@
                 <input type="text"  [pattern]="'[A-Za-z0-9_]+'" placeholder="Enter Section Name" #section class="section-input" (keyup.enter)="addNewSection(section)">
                 <span class="fa fa-plus-square mr-1" (click)="addNewSection(section)" ></span>
             </div>
-            <app-section *ngFor="let note of notebooksList" [currentNote]="note" (loadNote)="showNote($event)"></app-section>
+            <app-section *ngFor="let note of notebooksList" [currentNote]="note" (deleteNote)="deleteSection($event)" (loadNote)="showNote($event)"></app-section>
         </div>
         <div class="col-md-2 page-col" *ngIf="currentNotebook">
             <div class="add-section">

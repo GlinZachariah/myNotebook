@@ -10,6 +10,7 @@ export class SectionComponent implements OnInit {
   showDelete:boolean = false;
   @Input() currentNote:Notebook;
   @Output() loadNote = new EventEmitter<Notebook>();
+  @Output() deleteNote = new EventEmitter<Notebook>();
   constructor() { }
 
   ngOnInit(): void {
@@ -17,6 +18,10 @@ export class SectionComponent implements OnInit {
 
   loadPage(Note:Notebook){
     this.loadNote.emit(Note);
+  }
+
+  deleteSection(note){
+    this.deleteNote.emit(note);
   }
 
 }
