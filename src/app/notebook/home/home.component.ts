@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
         else if(res.message == "NOT EMPTY"){
           let filenames:string[] = res.payLoad;
           var sectionPresent = false;
-          console.log(this.route);
+          // console.log(this.route);
           filenames.forEach((file)=>{
             if(this.route.snapshot.params != undefined && this.route.snapshot.params.section == file){
               this.currentNotebook = new Notebook(file);
@@ -52,6 +52,8 @@ export class HomeComponent implements OnInit {
         });
       }
     }
+
+   
     
   }
 
@@ -67,7 +69,7 @@ export class HomeComponent implements OnInit {
       if(duplicate == 0){
         this.service.notebooks.push(new Notebook(section.value));
         this.service.addNewSection(section.value).subscribe((req)=>{
-          console.log(req);
+          // console.log(req);
   
         });
       }
@@ -106,6 +108,25 @@ export class HomeComponent implements OnInit {
   showPage(page:string){
     this.currentPage = page;
     console.log(this.currentPage);
+  }
+
+  updateNote(event:string){
+    let names = event.split("<>");
+    this.service.updateSection(names[0],names[1]).subscribe((res)=>{
+      this.service.notebooks.forEach((note)=>{
+        if(note.section == names[0]){
+          note.section = names[1];
+          // if(this.route.snapshot.params!= undefined && this.route.snapshot.params.section == names[0]){
+          //   // console.log(this.route);
+          //   // console.log(this.route.params.subscribe());
+          //   // this.route.params.subscribe
+          //   // this.router.navigate(['section',names[1]],{replaceUrl:true});
+          // }
+        }
+          
+      });
+    })
+
   }
 
 }

@@ -22,4 +22,8 @@ export class NotebookService {
   deleteSection(value){
     return this.http.post("/api/section/deleteSection", new RequestModel("deleteSection",value));
   }
+
+  updateSection(oldValue,newValue){
+    return this.http.put("/api/section/editSection",new RequestModel("editSection",{oldName:oldValue,newName:newValue}));
+  }
 }

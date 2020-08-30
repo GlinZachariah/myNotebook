@@ -8,20 +8,35 @@ import { Notebook } from 'src/app/services/notebook.model';
 })
 export class SectionComponent implements OnInit {
   showDelete:boolean = false;
+  showEdit:boolean =false;
+  data:string;
   @Input() currentNote:Notebook;
   @Output() loadNote = new EventEmitter<Notebook>();
   @Output() deleteNote = new EventEmitter<Notebook>();
+  @Output() updateNote = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  loadPage(Note:Notebook){
-    this.loadNote.emit(Note);
+  editSection(){
+    this.showEdit =true;
+    this.data = this.currentNote.section;
   }
 
-  deleteSection(note){
-    this.deleteNote.emit(note);
+  loadPage(){
+    this.loadNote.emit(this.currentNote);
+  }
+
+  deleteSection(){
+    this.deleteNote.emit(this.currentNote);
+  }
+
+  updateSection(){
+    console.log(this.data);
+    this.showEdit= false;
+    this.updateNote.emit(this.currentNote.section+'<>'+this.data.trim());
+   
   }
 
 }

@@ -3,17 +3,39 @@
     <div class="row">
         <div class="section-col">
             <div class="add-section" >
-                <input type="text"  [pattern]="'[A-Za-z0-9_]+'" placeholder="Enter Section Name" #section class="section-input" (keyup.enter)="addNewSection(section)">
+                <input type="text"  
+                [pattern]="'[A-Za-z0-9_]+'" 
+                placeholder="Enter Section Name" 
+                #section 
+                class="section-input" 
+                (keyup.enter)="addNewSection(section)"
+                >
                 <span class="fa fa-plus-square mr-1" (click)="addNewSection(section)" ></span>
             </div>
-            <app-section *ngFor="let note of notebooksList" [currentNote]="note" (deleteNote)="deleteSection($event)" (loadNote)="showNote($event)"></app-section>
+            <app-section 
+                *ngFor="let note of notebooksList" 
+                [currentNote]="note" 
+                (deleteNote)="deleteSection($event)" 
+                (loadNote)="showNote($event)"
+                (updateNote)="updateNote($event)"
+                >
+            </app-section>
         </div>
         <div class="page-col" *ngIf="currentNotebook">
             <div class="add-section">
-                <input type="text" [pattern]="'[A-Za-z0-9_]+'" placeholder="Enter Page Name" #page class="section-input" (keyup.enter)="addNewPage(page)">
+                <input type="text" 
+                    [pattern]="'[A-Za-z0-9_]+'" 
+                    placeholder="Enter Page Name" 
+                    #page 
+                    class="section-input" 
+                    (keyup.enter)="addNewPage(page)">
                 <span class="fa fa-plus-square mr-1" (click)="addNewPage(page)" ></span>
             </div>
-            <app-page *ngFor="let single_page of currentNotebook.page" [currentPage]="single_page" (loadPage)="showPage($event)" ></app-page>
+            <app-page 
+                *ngFor="let single_page of currentNotebook.page" 
+                [currentPage]="single_page" (loadPage)="showPage($event)" 
+                >
+            </app-page>
         </div>
         <div class="">Content</div>
     </div>

@@ -1,8 +1,31 @@
 <div class="section" (mouseover)="showDelete=true" (mouseout)="showDelete =false" >
-    <span class="pr-4" (click)="loadPage(currentNote)">
-        {{currentNote.section}}
+    <div 
+        [ngClass]="{'v-hidden':!showDelete}" 
+        (click)="editSection()"  
+        class="fa fa-pencil mt-1 "
+    >
+    </div>
+    <span 
+        *ngIf="!showEdit" 
+        class="ml-3 pr-4" 
+        (click)="loadPage()"
+        >
+            {{currentNote.section}}
     </span>
+    <input 
+        *ngIf="showEdit" 
+        type="text"  
+        [pattern]="'[A-Za-z0-9_]+'" 
+        placeholder="Enter New Section Name" 
+        [(ngModel)]="data" class=" section-input" 
+        (keyup.enter)="updateSection()">
    
 
-    <div [ngClass]="{'d-none':!showDelete}" (click)="deleteSection(currentNote)"  class="float-right fa fa-trash mt-1 ml-3 pl-2 pr-2"></div>
+    <div 
+        *ngIf="!showEdit" 
+        [ngClass]="{'d-none':!showDelete}" 
+        (click)="deleteSection()"  
+        class="float-right fa fa-trash mt-1 ml-3 pl-2 pr-2"
+        >
+    </div>
 </div>
