@@ -8,6 +8,7 @@ import { RequestModel } from "../services/request.model";
 })
 export class NotebookService {
   notebooks:Notebook[]=[];
+  firstLoad:boolean = false;
   constructor(private http:HttpClient) { }
 
   addNewSection(value){

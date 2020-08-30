@@ -14,39 +14,63 @@ export class HomeComponent implements OnInit {
   currentNotebook:Notebook;
   currentPage;
   
-  constructor(private service:NotebookService,private router:Router) { 
+  constructor(private service:NotebookService,private router:Router,private route:ActivatedRoute) { 
     this.notebooksList=this.service.notebooks;
    }
 
   ngOnInit(): void {
-    this.service.getSectionDetails().subscribe((res:Response)=>{
-      console.log(res);
-      if(res.message == "ERROR")
+    if(!this.service.firstLoad){
+      this.service.getSectionDetails().subscribe((res:Response)=>{
         console.log(res);
-      else if(res.message == "NOT EMPTY"){
-        let filenames:string[] = res.payLoad;
-        filenames.forEach((file)=>{
-          var flag=1;
-          this.service.notebooks.forEach((note)=>{
-            if(note.section == file){
-              var flag=0;
+        if(res.message == "ERROR")
+          console.log(res);
+        else if(res.message == "NOT EMPTY"){
+          let filenames:string[] = res.payLoad;
+          var sectionPresent = false;
+          console.log(this.route);
+          filenames.forEach((file)=>{
+            if(this.route.snapshot.params != undefined && this.route.snapshot.params.section == file){
+              this.currentNotebook = new Notebook(file);
+              this.service.notebooks.push(this.currentNotebook);
+              sectionPresent =true;
+            }else if(this.route.snapshot.params.section != file){
+              this.service.notebooks.push(new Notebook(file));
             }
-          });
-          if(flag==1)
-            this.service.notebooks.push(new Notebook(file));
-        })
+          })
+          this.service.firstLoad = true;
+          if(this.route.snapshot.params.section != undefined && !sectionPresent){
+            console.log("Not valid page");
+            this.router.navigate(["404"],{replaceUrl:true});
+          }
+        }
+      });
+    }else{
+      if(this.route.snapshot.params != undefined){
+         this.service.notebooks.forEach((note)=>{
+          if(note.section == this.route.snapshot.params.section)
+            this.currentNotebook = note;
+        });
       }
-    });
+    }
+    
   }
 
   addNewSection(section:HTMLInputElement){
+    section.value = section.value.trim();
     if(section.value.length > 0 && !section.validity.patternMismatch)
-      this.service.notebooks.push(new Notebook(section.value));
-      this.service.addNewSection(section.value).subscribe((req)=>{
-        console.log(req);
-
-      })
-      
+      var duplicate = 0;
+      this.service.notebooks.forEach((note)=>{
+        if(note.section == section.value){
+          duplicate =1;
+        }
+      });
+      if(duplicate == 0){
+        this.service.notebooks.push(new Notebook(section.value));
+        this.service.addNewSection(section.value).subscribe((req)=>{
+          console.log(req);
+  
+        });
+      }
     section.value='';
   }
 
@@ -62,9 +86,8 @@ export class HomeComponent implements OnInit {
 
   showNote(note:Notebook){
     this.currentNotebook = note;
-    // console.log("ROuter data : ");
-    // console.log(this.router);
-    this.router.navigate([note.section]);
+
+    this.router.navigate(['notebook',note.section]);
     console.log(note);
   }
 
@@ -75,6 +98,8 @@ export class HomeComponent implements OnInit {
       else
         var pos = this.service.notebooks.indexOf(note);
         this.service.notebooks.splice(pos,1);
+        if(note == this.currentNotebook)
+          this.router.navigate(['']);
     });
   }
 

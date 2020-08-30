@@ -4,11 +4,12 @@ import { SectionComponent } from './section/section.component';
 import { PageComponent } from './page/page.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 
 @NgModule({
-  declarations: [SectionComponent, PageComponent, HomeComponent, HeaderComponent],
+  declarations: [SectionComponent, PageComponent, HomeComponent, HeaderComponent, NotfoundComponent],
   imports: [
     CommonModule
   ]

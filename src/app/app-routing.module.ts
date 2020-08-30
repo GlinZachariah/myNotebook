@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from "./notebook/home/home.component";
+import { NotfoundComponent } from './notebook/notfound/notfound.component';
 
 const routes: Routes = [
     {
@@ -9,8 +10,14 @@ const routes: Routes = [
         component:HomeComponent
     },
     {
-      path:":section",
+      path:"notebook/:section",
       component:HomeComponent
+    },{
+      path:"404",
+      component:NotfoundComponent
+    },{
+      path:"**",
+      component:NotfoundComponent
     }
 ];
 
