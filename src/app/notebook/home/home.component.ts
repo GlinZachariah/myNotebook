@@ -116,12 +116,8 @@ export class HomeComponent implements OnInit {
       this.service.notebooks.forEach((note)=>{
         if(note.section == names[0]){
           note.section = names[1];
-          // if(this.route.snapshot.params!= undefined && this.route.snapshot.params.section == names[0]){
-          //   // console.log(this.route);
-          //   // console.log(this.route.params.subscribe());
-          //   // this.route.params.subscribe
-          //   // this.router.navigate(['section',names[1]],{replaceUrl:true});
-          // }
+          if(this.route.snapshot.params!= undefined && this.route.snapshot.params.section == names[0])
+            this.showNote(note);
         }
           
       });

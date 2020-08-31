@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 import { HomeComponent } from "./notebook/home/home.component";
 import { NotfoundComponent } from './notebook/notfound/notfound.component';
@@ -21,7 +21,12 @@ const routes: Routes = [
     }
 ];
 
+const config: ExtraOptions = {
+  enableTracing: true,
+};
+
 @NgModule({
+  // imports: [RouterModule.forRoot(routes,config)],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
