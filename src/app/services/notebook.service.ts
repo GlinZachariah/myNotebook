@@ -9,23 +9,11 @@ import { RequestModel } from "../services/request.model";
 export class NotebookService {
   notebooks:Notebook[]=[];
   firstLoad:boolean = false;
-  constructor(private http:HttpClient) { }
+  constructor() { }
 
-  addNewSection(value){
-    return this.http.post("/api/section/addNewSection",new RequestModel("addNewSection",value));
-  }
-        
-  getSectionDetails(){
-    return this.http.get("/api/section/getSectionDetails");
-  }
+  
 
-  deleteSection(value){
-    return this.http.delete("/api/section/deleteSection/"+value);
-  }
-
-  updateSection(oldValue,newValue){
-    return this.http.put("/api/section/editSection",new RequestModel("editSection",{oldName:oldValue,newName:newValue}));
-  }
+  
 
   
 }

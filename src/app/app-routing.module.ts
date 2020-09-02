@@ -13,6 +13,9 @@ const routes: Routes = [
       path:"notebook/:section",
       component:HomeComponent
     },{
+      path:"notebook/:section/:page",
+      component:HomeComponent
+    },{
       path:"404",
       component:NotfoundComponent
     },{

@@ -6,6 +6,12 @@
     padding: 0;
 }
 
+.section-selected{
+    width: 25px;
+    background-color: #7d3cff;
+    color:#ffffff;
+}
+
 .page-col{
     height: 100vh;
     border-right:5px solid #7d3cff;

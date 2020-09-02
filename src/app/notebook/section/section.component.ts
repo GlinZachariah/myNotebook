@@ -32,10 +32,13 @@ export class SectionComponent implements OnInit {
     this.deleteNote.emit(this.currentNote);
   }
 
-  updateSection(){
-    console.log(this.data);
-    this.showEdit= false;
-    this.updateNote.emit(this.currentNote.section+'<>'+this.data.trim());
+  updateSection(sectionEdit : HTMLInputElement){
+    if(this.data.trim().length > 0 && !sectionEdit.validity.patternMismatch){
+      this.showEdit= false;
+      this.updateNote.emit(this.currentNote.section+'<>'+this.data.trim());
+    }
+    
+    
    
   }
 

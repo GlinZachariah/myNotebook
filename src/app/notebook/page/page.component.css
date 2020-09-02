@@ -4,3 +4,17 @@
     height: 45px;
     padding:10px;
 }
+
+.v-hidden{
+    visibility: hidden;
+}
+
+.section-input{
+    font-size: revert;
+    background-color: #b997fd;
+    border: 0;
+}
+
+.section-input:focus{
+    outline-color: #7d3cff;
+}

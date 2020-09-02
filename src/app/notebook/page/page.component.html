@@ -1,5 +1,34 @@
-<div class="page" (mouseover)="showDelete=true" (mouseout)="showDelete =false" (click)="loadContent(currentPage)">
-    {{currentPage}}
+<div class="page" 
+    (mouseover)="showDelete=true" 
+    (mouseout)="showDelete =false" >
+    <div 
+        [ngClass]="{'v-hidden':!showDelete}" 
+        (click)="editPage()"  
+        class="fa fa-pencil mt-1 "
+    >
+    </div>
+    <span 
+        *ngIf="!showEdit" 
+        class="ml-2 pr-4" 
+        (click)="loadContent(currentPage)"
+        >{{currentPage}}
+    </span>
+    <input 
+        #pageEdit
+        *ngIf="showEdit" 
+        type="text"  
+        [pattern]="'[A-Za-z0-9_]+'" 
+        placeholder="Enter New Page Name" 
+        [(ngModel)]="data" class="section-input" 
+        (keyup.enter)="updatePage(pageEdit)">
+   
 
-    <div [ngClass]="{'d-none':!showDelete}"  class="float-right fa fa-trash mt-1"></div>
+    <div 
+        *ngIf="!showEdit" 
+        [ngClass]="{'d-none':!showDelete}" 
+        (click)="deletePage()"  
+        class="float-right fa fa-trash mt-1 "
+        >
+    </div>
+
 </div>

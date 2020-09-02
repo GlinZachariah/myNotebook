@@ -14,11 +14,12 @@
     </span>
     <input 
         *ngIf="showEdit" 
-        type="text"  
+        type="text"
+        #sectionEdit  
         [pattern]="'[A-Za-z0-9_]+'" 
         placeholder="Enter New Section Name" 
         [(ngModel)]="data" class=" section-input" 
-        (keyup.enter)="updateSection()">
+        (keyup.enter)="updateSection(sectionEdit)">
    
 
     <div 

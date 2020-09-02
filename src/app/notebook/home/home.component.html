@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <app-header></app-header>
     <div class="row">
-        <div class="section-col">
+        <div class="section-col" *ngIf="!this.currentNotebook">
             <div class="add-section" >
                 <input type="text"  
                 [pattern]="'[A-Za-z0-9_]+'" 
@@ -21,6 +21,7 @@
                 >
             </app-section>
         </div>
+        <div class="section-col section-selected" (click)="displaySection()"></div>
         <div class="page-col" *ngIf="currentNotebook">
             <div class="add-section">
                 <input type="text" 
@@ -33,7 +34,10 @@
             </div>
             <app-page 
                 *ngFor="let single_page of currentNotebook.page" 
-                [currentPage]="single_page" (loadPage)="showPage($event)" 
+                [currentPage]="single_page" 
+                (loadPage)="showPage($event)"
+                (removePage)="deletePage($event)"
+                (renamePage)="editPage($event)" 
                 >
             </app-page>
         </div>
