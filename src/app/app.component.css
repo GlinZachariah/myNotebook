@@ -1,0 +1,15 @@
+.left-pane{
+    width: 60px;
+    background-color: #000000;
+}
+
+.right-pane{
+    flex: 1 1;
+}
+
+.panel-icon{
+    color: #ffffff;
+    display: block;
+    width: min-content;
+    margin: auto;
+}

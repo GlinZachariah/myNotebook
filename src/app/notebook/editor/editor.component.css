@@ -1,0 +1,7 @@
+.note-editor.note-frame ,.note-status-output{
+    height: 100vh !important;
+}
+
+.note-editable{
+    height: 100vh !important;
+}

@@ -1,49 +1,74 @@
-<div class="container-fluid">
-    <app-header></app-header>
-    <div class="row">
-        <div class="section-col" *ngIf="!this.currentNotebook">
-            <div class="add-section" >
-                <input type="text"  
-                [pattern]="'[A-Za-z0-9_]+'" 
-                placeholder="Enter Section Name" 
-                #section 
-                class="section-input" 
-                (keyup.enter)="addNewSection(section)"
-                >
-                <span class="fa fa-plus-square mr-1" (click)="addNewSection(section)" ></span>
-            </div>
-            <app-section 
-                *ngFor="let note of notebooksList" 
-                [currentNote]="note" 
-                (deleteNote)="deleteSection($event)" 
-                (loadNote)="showNote($event)"
-                (updateNote)="updateNote($event)"
-                >
-            </app-section>
+<div class="row m-0">
+    <div class="section-col" *ngIf="!this.currentNotebook">
+        <div class="add-section" >
+            <input type="text"  
+            [pattern]="'[A-Za-z0-9_]+'" 
+            placeholder="Enter Section Name" 
+            #section 
+            class="section-input" 
+            (keyup.enter)="addNewSection(section)"
+            >
+            <span class="fa fa-plus-square mr-1" (click)="addNewSection(section)" ></span>
         </div>
-        <div class="section-col section-selected" (click)="displaySection()"></div>
-        <div class="page-col" *ngIf="currentNotebook">
-            <div class="add-section">
-                <input type="text" 
-                    [pattern]="'[A-Za-z0-9_]+'" 
-                    placeholder="Enter Page Name" 
-                    #page 
-                    class="section-input" 
-                    (keyup.enter)="addNewPage(page)">
-                <span class="fa fa-plus-square mr-1" (click)="addNewPage(page)" ></span>
-            </div>
-            <app-page 
-                *ngFor="let single_page of currentNotebook.page" 
-                [currentPage]="single_page" 
-                (loadPage)="showPage($event)"
-                (removePage)="deletePage($event)"
-                (renamePage)="editPage($event)" 
-                >
-            </app-page>
-        </div>
-        <div class="">Content</div>
+        <app-section 
+            *ngFor="let note of notebooksList" 
+            [currentNote]="note" 
+            (deleteNote)="deleteSection($event)" 
+            (loadNote)="showNote($event)"
+            (updateNote)="updateNote($event)"
+            >
+        </app-section>
     </div>
+    <div class="section-col section-selected" (click)="displaySection()"></div>
+    <div class="page-col" *ngIf="currentNotebook">
+        <div class="add-section">
+            <input type="text" 
+                [pattern]="'[A-Za-z0-9_]+'" 
+                placeholder="Enter Page Name" 
+                #page 
+                class="section-input" 
+                (keyup.enter)="addNewPage(page)">
+            <span class="fa fa-plus-square mr-1" (click)="addNewPage(page)" ></span>
+        </div>
+        <app-page 
+            *ngFor="let single_page of currentNotebook.page" 
+            [currentPage]="single_page" 
+            (loadPage)="showPage($event)"
+            (removePage)="deletePage($event)"
+            (renamePage)="editPage($event)" 
+            >
+        </app-page>
+    </div>
+    <div class="content-area">
+        <div class="row m-0" *ngIf="currentPage">
+            <div class="content-area-btn" 
+                *ngIf="viewState" 
+                (click)="showEditor()"
+            >
+                <i class="fa fa-pencil fa-2x mt-3" aria-hidden="true"></i>
+            </div>
+            <div 
+                class="content-area-btn" 
+                *ngIf="!viewState" 
+                (click)="showViewer()"
+            >
+                <i class="fa fa-file-text-o fa-2x mt-3" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="row m-0 fh" *ngIf="viewState  == true">
+            <app-viewer></app-viewer>
+            <!-- <app-editor [style.height.%]="100"></app-editor> -->
+        </div>
+        <div class="row m-0 fh" *ngIf="viewState == false">
+            <app-editor></app-editor>
+        </div>
+        <div class="row m-0 fh" *ngIf="viewState == undefined">
+            Select page to view
+        </div>
 
+
+    </div>
 </div>
+
 
 

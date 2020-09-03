@@ -9,6 +9,8 @@ import { RequestModel } from "../services/request.model";
 export class NotebookService {
   notebooks:Notebook[]=[];
   firstLoad:boolean = false;
+
+  showViewer:boolean = true;
   constructor() { }
 
   

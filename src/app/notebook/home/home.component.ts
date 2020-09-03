@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   currentNotebook:Notebook;
   currentPage;
+  viewState;
   
   constructor(
     private service:NotebookService,
@@ -58,6 +59,10 @@ export class HomeComponent implements OnInit {
          this.service.notebooks.forEach((note)=>{
           if(note.section == this.route.snapshot.params.section)
             this.currentNotebook = note;
+            if(this.route.snapshot.params.page != undefined){
+              this.currentPage = this.route.snapshot.params.page;
+              this.viewState = this.service.showViewer;
+            } 
         });
       }
     }
@@ -146,8 +151,8 @@ export class HomeComponent implements OnInit {
 
   showPage(page:string){
     this.currentPage = page;
-    console.log(this.currentPage);
     this.router.navigate(['/notebook',this.currentNotebook.section,page]);
+    
   }
 
 
@@ -172,6 +177,17 @@ export class HomeComponent implements OnInit {
         }
       })
     });
+  }
+
+
+  showEditor(){
+    this.viewState = false;
+    this.service.showViewer = false;
+  }
+
+  showViewer(){
+    this.viewState = true;
+    this.service.showViewer = true;
   }
 
 }

@@ -34,3 +34,26 @@
     outline-color: #7d3cff;
 }
 
+.content-area{
+    flex: 1 1;
+    height: 100vh;
+}
+
+
+.fh{
+    height: 100vh !important;
+}
+
+.content-area-btn{
+    text-align: center;
+    background-color: #7d3cff;
+    color: #ffffff;
+    position: absolute;
+    right: 4.2rem;
+    bottom: -3.8rem;
+    z-index: 5;
+    width: 70px;
+    height: 70px;
+    border-radius: 2.2rem;
+
+}

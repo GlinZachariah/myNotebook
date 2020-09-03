@@ -1,1 +1,16 @@
-<router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="row" >
+        <div class="left-pane d-none">
+            <span >
+                <i class="fa fa-cog fa-2x mt-4 mb-4 panel-icon"></i>
+            </span>
+            <span >
+                <i class="fa fa-folder-open fa-2x mt-4 mb-4 panel-icon"></i>
+            </span>
+        </div>
+        <div class="right-pane">
+            <app-header></app-header>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
