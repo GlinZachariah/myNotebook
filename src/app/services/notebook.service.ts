@@ -11,9 +11,15 @@ export class NotebookService {
   firstLoad:boolean = false;
 
   showViewer:boolean = true;
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  
+  getPageContent(section,page){
+    return this.http.get("/api/editor/getFile/"+section+"/"+page);
+  }
+
+  updatePageContent(section,page,content){
+    return this.http.put("/api/editor/updateFile",new RequestModel("updatePageContent",{section:section,page:page,data:content}));
+  }
 
   
 

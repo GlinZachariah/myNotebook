@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   currentNotebook:Notebook;
   currentPage;
+  pageData;
   viewState;
   
   constructor(
@@ -59,12 +60,17 @@ export class HomeComponent implements OnInit {
          this.service.notebooks.forEach((note)=>{
           if(note.section == this.route.snapshot.params.section)
             this.currentNotebook = note;
-            if(this.route.snapshot.params.page != undefined){
-              this.currentPage = this.route.snapshot.params.page;
-              this.viewState = this.service.showViewer;
-            } 
+            
         });
       }
+      if(this.route.snapshot.params.page != undefined){
+        this.currentPage = this.route.snapshot.params.page;
+        this.viewState = this.service.showViewer;
+        this.service.getPageContent( this.route.snapshot.params.section,this.currentPage).subscribe((res:Response)=>{
+          this.pageData = res.payLoad;
+          console.log("Data Loaded");
+        });
+      } 
     }
 
    
@@ -162,6 +168,7 @@ export class HomeComponent implements OnInit {
       this.currentNotebook.page.forEach((value,index)=>{
         if(value == names[0]){
           this.currentNotebook.page[index] = names[1];
+          this.router.navigate(['/notebook',this.currentNotebook.section,names[1]]);
         }
       });
     });
@@ -188,6 +195,13 @@ export class HomeComponent implements OnInit {
   showViewer(){
     this.viewState = true;
     this.service.showViewer = true;
+  }
+
+  savePage(event){
+    this.pageData = event;
+    this.service.updatePageContent(this.route.snapshot.params.section, this.route.snapshot.params.page,event).subscribe((res:Response)=>{
+      
+    });
   }
 
 }

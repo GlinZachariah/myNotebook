@@ -56,11 +56,16 @@
             </div>
         </div>
         <div class="row m-0 fh" *ngIf="viewState  == true">
-            <app-viewer></app-viewer>
-            <!-- <app-editor [style.height.%]="100"></app-editor> -->
+            <app-viewer
+                [pageContent]="pageData"
+            >
+            </app-viewer>
         </div>
         <div class="row m-0 fh" *ngIf="viewState == false">
-            <app-editor></app-editor>
+            <app-editor 
+            [content]="pageData"
+            (saveEvent)="savePage($event)"
+            ></app-editor>
         </div>
         <div class="row m-0 fh" *ngIf="viewState == undefined">
             Select page to view

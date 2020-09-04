@@ -37,6 +37,7 @@
 .content-area{
     flex: 1 1;
     height: 100vh;
+    overflow: scroll;
 }
 
 
@@ -57,3 +58,4 @@
     border-radius: 2.2rem;
 
 }
+
